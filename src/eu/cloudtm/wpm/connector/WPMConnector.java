@@ -11,6 +11,7 @@ import java.rmi.server.UnicastRemoteObject;
 import eu.cloudtm.wpm.logService.remote.events.SubscribeEvent;
 import eu.cloudtm.wpm.logService.remote.listeners.WPMStatisticsRemoteListener;
 import eu.cloudtm.wpm.logService.remote.listeners.WPMViewChangeRemoteListener;
+import eu.cloudtm.wpm.logService.remote.observables.Handle;
 import eu.cloudtm.wpm.logService.remote.observables.WPMObservable;
 
 public class WPMConnector {
@@ -32,19 +33,19 @@ public class WPMConnector {
 	}
 	
 	
-	public void registerStatisticsRemoteListener(SubscribeEvent event, WPMStatisticsRemoteListener listener) throws RemoteException{
+	public Handle registerStatisticsRemoteListener(SubscribeEvent event, WPMStatisticsRemoteListener listener) throws RemoteException{
 		
 		WPMStatisticsRemoteListener stub_listener = (WPMStatisticsRemoteListener) UnicastRemoteObject.exportObject(listener, 0);
 		
-		this.observable.registerWPMStatisticsRemoteListener(event, listener);
+		return this.observable.registerWPMStatisticsRemoteListener(event, listener);
 		
 	}
 	
-	public void registerViewChangeRemoteListener(WPMViewChangeRemoteListener listener) throws RemoteException{
+	public Handle registerViewChangeRemoteListener(WPMViewChangeRemoteListener listener) throws RemoteException{
 		
 		WPMViewChangeRemoteListener stub_listener = (WPMViewChangeRemoteListener) UnicastRemoteObject.exportObject(listener, 0);
 		
-		this.observable.registerWPMViewChangeRemoteListener(listener);
+		return this.observable.registerWPMViewChangeRemoteListener(listener);
 		
 	}
 
