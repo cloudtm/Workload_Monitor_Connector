@@ -37,7 +37,7 @@ public class WPMConnector {
 		
 		WPMStatisticsRemoteListener stub_listener = (WPMStatisticsRemoteListener) UnicastRemoteObject.exportObject(listener, 0);
 		
-		return this.observable.registerWPMStatisticsRemoteListener(event, listener);
+		return this.observable.registerWPMStatisticsRemoteListener(event, stub_listener);
 		
 	}
 	
@@ -45,8 +45,19 @@ public class WPMConnector {
 		
 		WPMViewChangeRemoteListener stub_listener = (WPMViewChangeRemoteListener) UnicastRemoteObject.exportObject(listener, 0);
 		
-		return this.observable.registerWPMViewChangeRemoteListener(listener);
+		return this.observable.registerWPMViewChangeRemoteListener(stub_listener);
 		
+	}
+	
+	public void removeStatisticsRemoteListener(Handle handle) throws RemoteException{
+		
+		this.observable.removeWPMStatisticsRemoteListener(handle);
+		
+	}
+	
+	public void removeViewChangeRemoteListener(Handle handle) throws RemoteException{
+		
+		this.observable.removeWPMViewChangeRemoteListener(handle);
 	}
 
 }
