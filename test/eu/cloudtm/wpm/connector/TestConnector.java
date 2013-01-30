@@ -4,10 +4,7 @@ import java.net.UnknownHostException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 
-import eu.cloudtm.wpm.logService.remote.events.SubscribeEvent;
-import eu.cloudtm.wpm.logService.remote.listeners.TestWPMStatisticsRemoteListenerImpl;
 import eu.cloudtm.wpm.logService.remote.listeners.TestWPMViewChangeRemoteListenerImpl;
-import eu.cloudtm.wpm.logService.remote.listeners.WPMStatisticsRemoteListener;
 import eu.cloudtm.wpm.logService.remote.listeners.WPMViewChangeRemoteListener;
 
 public class TestConnector {
