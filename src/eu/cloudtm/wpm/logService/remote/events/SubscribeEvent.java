@@ -74,6 +74,9 @@ public class SubscribeEvent implements Externalizable{
 				out.writeUTF(this.VMs[i]);
 			}
 		}
+		else{
+			out.writeInt(0);
+		}
 		
 	}
 	

@@ -29,7 +29,6 @@ import java.io.ObjectInput;
 import java.io.ObjectOutput;
 
 import eu.cloudtm.wpm.parser.ResourceType;
-
 /*
 * @author Sebastiano Peluso
 */
@@ -37,6 +36,7 @@ public class PublishAttribute<T> implements Externalizable{
 	
 	private ResourceType resourceType;
 	private int resourceIndex;
+	private int attributeIndex;
 	
 	private String name;
 	private T value;
@@ -45,10 +45,11 @@ public class PublishAttribute<T> implements Externalizable{
 		
 	}
 
-	public PublishAttribute(ResourceType resourceType, int resourceIndex, String name, T value){
+	public PublishAttribute(ResourceType resourceType, int resourceIndex, int attributeIndex, String name, T value){
 		
 		this.resourceType = resourceType;
 		this.resourceIndex = resourceIndex;
+		this.attributeIndex = attributeIndex;
 		this.name=name;
 		this.value=value;
 	}
@@ -79,6 +80,16 @@ public class PublishAttribute<T> implements Externalizable{
 	public void setResourceIndex(int resourceIndex) {
 		this.resourceIndex = resourceIndex;
 	}
+	
+	
+
+	public int getAttributeIndex() {
+		return attributeIndex;
+	}
+
+	public void setAttributeIndex(int attributeIndex) {
+		this.attributeIndex = attributeIndex;
+	}
 
 	public void setName(String name) {
 		this.name = name;
@@ -87,6 +98,16 @@ public class PublishAttribute<T> implements Externalizable{
 	public void setValue(T value) {
 		this.value = value;
 	}
+	
+	public boolean isNumeric(){
+		
+		return (value instanceof Integer) || (value instanceof Double) || (value instanceof Long) || (value instanceof Long);
+	}
+	
+    public boolean isBoolean(){
+		
+		return value instanceof Boolean;
+	}
 
 	@Override
 	public void readExternal(ObjectInput in) throws IOException,
@@ -94,6 +115,7 @@ public class PublishAttribute<T> implements Externalizable{
 		
 		this.resourceType = ResourceType.valueOf(ResourceType.class, in.readUTF());
 		this.resourceIndex = in.readInt();
+		this.attributeIndex = in.readInt();
 		this.name = in.readUTF();
 		this.value = (T) in.readObject();
 		
@@ -104,6 +126,7 @@ public class PublishAttribute<T> implements Externalizable{
 		
 		out.writeUTF(this.resourceType.name());
 		out.writeInt(this.resourceIndex);
+		out.writeInt(this.attributeIndex);
 		out.writeUTF(this.name);
 		out.writeObject(this.value);
 		
