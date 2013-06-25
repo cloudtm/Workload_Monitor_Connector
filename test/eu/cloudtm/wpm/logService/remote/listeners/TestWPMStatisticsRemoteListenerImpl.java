@@ -28,6 +28,7 @@ import java.util.HashMap;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import eu.cloudtm.wpm.logService.remote.events.PublishAggregatedStatisticsEvent;
 import eu.cloudtm.wpm.logService.remote.events.PublishAttribute;
 import eu.cloudtm.wpm.logService.remote.events.PublishMeasurement;
 import eu.cloudtm.wpm.logService.remote.events.PublishStatisticsEvent;
@@ -80,6 +81,28 @@ public class TestWPMStatisticsRemoteListenerImpl implements
 		}
 		
 
+	}
+
+	@Override
+	public void onNewAggregatedStatistics(PublishAggregatedStatisticsEvent event)
+			throws RemoteException {
+		
+		System.out.println("Printing Aggregated Statistics");
+		
+		PublishMeasurement pm = event.getPublishMeasurement(ResourceType.JMX);
+		HashMap<String, PublishAttribute> values = pm.getValues();
+		if(values != null && !values.isEmpty()){
+			
+			Set<Entry<String,PublishAttribute>> entries = values.entrySet();
+			
+			for(Entry<String,PublishAttribute> entry: entries){
+				
+				System.out.println(""+entry.getKey()+" - "+entry.getValue().getValue());
+				
+			}
+		}
+		
+		
 	}
 
 }
