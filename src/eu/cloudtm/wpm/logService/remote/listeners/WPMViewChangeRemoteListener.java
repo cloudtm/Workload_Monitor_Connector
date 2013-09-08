@@ -33,6 +33,6 @@ import eu.cloudtm.wpm.logService.remote.events.PublishViewChangeEvent;
 */
 public interface WPMViewChangeRemoteListener extends Remote {
 	
-	public void onViewChange(PublishViewChangeEvent event) throws RemoteException;;
+	public void onViewChange(PublishViewChangeEvent event) throws RemoteException;
 
 }

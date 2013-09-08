@@ -24,12 +24,13 @@
 package eu.cloudtm.wpm.parser;
 
 /*
-* @author Sebastiano Peluso
+* @author Roberto Palmieri
 */
 public enum ResourceType {
 	CPU,
 	MEMORY,
 	NETWORK,
 	DISK,
-	JMX
+	JMX,
+    FENIX,
 }
